@@ -86,7 +86,7 @@ async def handle_file_upload(update: Update, context: CallbackContext) -> None:
         return
 
     file = await file.get_file()  # Await this coroutine
-    local_file_path = f"./{file.file_unique_id}.ogg"  # Construct the local file path
+    local_file_path = f"./audio/{file.file_unique_id}.ogg"  # Construct the local file path
 
     await file.download_to_drive(
         local_file_path
