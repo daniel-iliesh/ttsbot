@@ -1,0 +1,12 @@
+services:
+  marsbot:
+    build: .
+    container_name: marsbot
+    env_file: ./.env
+    restart: always
+    labels:
+      homepage.name: "MarsBot"
+      homepage.icon: "telegram.png"
+      homepage.href: "https://rocket-champ.com/"
+      homepage.description: "ChatGPT Telegram Bot"
+      homepage.group: "Bots"
