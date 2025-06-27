@@ -3,6 +3,10 @@ services:
     build: .
     container_name: marsbot
     env_file: ./.env
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - CAMB_AI_API_KEY=${CAMB_AI_API_KEY}
+      - CAMB_AI_BASE_URL=${CAMB_AI_BASE_URL}
     restart: always
     labels:
       homepage.name: "MarsBot"
