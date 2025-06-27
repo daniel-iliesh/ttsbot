@@ -48,11 +48,11 @@ async def create_voice_command(update: Update, context: CallbackContext) -> None
     args = context.args
     if len(args) < 3:
         await update.message.reply_text(
-            'Usage: /createvoice <name> <gender> <age>. Gender can be "m" for Male or "f" for Female.'
+            'Usage: /createvoice <voice_name> <gender> <age>. Gender can be "m" for Male or "f" for Female.'
         )
         return
 
-    name = args[0]
+    voice_name = args[0]
     gender_input = args[1].lower()
     age = int(args[2])
 
@@ -66,7 +66,7 @@ async def create_voice_command(update: Update, context: CallbackContext) -> None
     user_id = update.message.from_user.id
 
     uploaded_files[user_id] = {
-        "name": name,
+        "voice_name": voice_name,
         "gender": gender,
         "age": age,
         "file_path": None,
@@ -93,12 +93,13 @@ async def handle_file_upload(update: Update, context: CallbackContext) -> None:
     )  # Download the file to the local file path
     uploaded_files[user_id]["file_path"] = local_file_path
 
-    name = uploaded_files[user_id]["name"]
+    voice_name = uploaded_files[user_id]["voice_name"]
     gender = uploaded_files[user_id]["gender"]
     age = uploaded_files[user_id]["age"]
 
     try:
-        voice = camb_ai.create_voice(name, gender, age, local_file_path)
+        voice = camb_ai.create_custom_voice(local_file_path, voice_name,
+                                            gender, age)
         await update.message.reply_text(
             f'Voice created successfully! Voice ID: {voice["voice_id"]}'
         )
