@@ -2,7 +2,6 @@ services:
   marsbot:
     build: .
     container_name: marsbot
-    env_file: ./.env
     environment:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
       - CAMB_AI_API_KEY=${CAMB_AI_API_KEY}
